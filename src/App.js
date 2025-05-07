@@ -3,15 +3,7 @@ import './App.css';
 
 function App() {
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        minHeight: "100vh",
-        fontFamily: "sans-serif",
-      }}
-    >
+    <div className="App">
       <h1>Hello React World from Fami Mahmud!</h1>
     </div>
   );
