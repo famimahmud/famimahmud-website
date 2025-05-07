@@ -12,7 +12,7 @@ function App() {
         fontFamily: "sans-serif",
       }}
     >
-      <h1>Hello World from Fami Mahmud!</h1>
+      <h1>Hello React World from Fami Mahmud!</h1>
     </div>
   );
 }

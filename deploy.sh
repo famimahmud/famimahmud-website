@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+
+echo "Installing dependencies..."
+npm install
+
+echo "Building project..."
+npm run build
+
 site=/var/www/famimahmud.de
 builddir=$HOME/code/famimahmud-website/build   # or dist if you use Vite
 timestamp=$(date +%Y-%m-%d-%H%M%S)
