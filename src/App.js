@@ -21,40 +21,16 @@ const ProjectSection = ({
   >
     <div
       className={`max-w-6xl mx-auto flex flex-col ${
-        image ? "md:flex-row items-center gap-12" : ""
+        image ? "md:flex-row items-start gap-12" : ""
       } ${reverse && image ? "md:flex-row-reverse" : ""}`}
     >
-      {/* Project description */}
-      <div className={`w-full ${image ? "md:w-1/2" : ""} text-center md:text-left`}>
+      {/* Text Section */}
+      <div className={`w-full ${image ? "md:w-1/2" : ""} text-left`}>
         <h3 className="text-3xl font-bold mb-4 text-gray-800">{title}</h3>
-        <p className="text-lg text-gray-700 leading-relaxed mb-6">{description}</p>
-
-        {/* Tech stack */}
-        <div className="flex flex-wrap justify-center md:justify-start gap-3 mb-6">
-          {techStack.map((tech) => (
-            <span
-              key={tech}
-              className="bg-white border px-4 py-1.5 rounded-full shadow-sm text-sm hover:shadow-md transition"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
-
-        {/* GitHub link (optional) */}
-        {github && (
-          <a
-            href={github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-gray-900 text-white px-6 py-2 rounded-full shadow hover:bg-gray-700 transition"
-          >
-            View on GitHub
-          </a>
-        )}
+        <p className="text-lg text-gray-700 leading-relaxed">{description}</p>
       </div>
 
-      {/* Project image (optional) */}
+      {/* Image Section */}
       {image && (
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
@@ -85,7 +61,39 @@ const ProjectSection = ({
         </motion.div>
       )}
     </div>
+
+    {/* Tech stack + GitHub always appear below, once */}
+    <div className="mt-12 text-center">
+      <TechAndLink techStack={techStack} github={github} />
+    </div>
   </section>
+);
+
+
+// Reusable Tech + Link Component
+const TechAndLink = ({ techStack, github }) => (
+  <div className="flex flex-col items-center gap-6">
+    <div className="flex flex-wrap justify-center gap-3">
+      {techStack.map((tech) => (
+        <span
+          key={tech}
+          className="bg-white border px-4 py-1.5 rounded-full shadow-sm text-sm hover:shadow-md transition"
+        >
+          {tech}
+        </span>
+      ))}
+    </div>
+    {github && (
+      <a
+        href={github}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-block bg-gray-900 text-white px-6 py-2 rounded-full shadow hover:bg-gray-700 transition"
+      >
+        View on GitHub
+      </a>
+    )}
+  </div>
 );
 
 
@@ -161,7 +169,7 @@ const App = () => {
           transition={{ duration: 0.6 }}
           className="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start gap-10"
         >
-          <div className="text-center md:text-left md:mt-4">
+          <div className="text-left md:mt-4">
             <h2 className="text-4xl font-bold mb-6 text-gray-800">About Me</h2>
             <p className="text-gray-700 text-lg leading-relaxed">
               I'm Fami Mahmud, a passionate researcher and developer with a background in AI and a strong interest in solving real-world problems. I hold a master's degree in Informatics from the Technical University of Munich, where I focused on Machine Learning and IT Security.
@@ -196,6 +204,7 @@ const App = () => {
         title="Identifying Setpieces in a Football Match"
         description="Designed and trained a model to classify set pieces in football using player and ball tracking data. Developed at the TUM Sports Informatics Chair."
         image={require("./assets/projects/setpieces/setpieces_image.png")}
+        imageLarge={require("./assets/projects/setpieces/setpieces_image.png")}
         techStack={["Python", "Scikit-Learn", "NumPy"]}
         bg="bg-white"
       />
@@ -238,9 +247,6 @@ const App = () => {
       {/* Contact Section */}
       <section id="contact" className="py-24 bg-white px-6 text-center">
         <h2 className="text-4xl font-bold mb-6 text-gray-800">Contact</h2>
-        <p className="text-gray-700 mb-6">
-          Feel free to reach out via email or connect with me on LinkedIn and GitHub.
-        </p>
         <div className="space-x-4">
           <a href="mailto:mahmudfami@gmail.com" className="text-blue-600 underline">
             mahmudfami@gmail.com
