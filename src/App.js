@@ -2,15 +2,14 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Typewriter } from "react-simple-typewriter";
 
-// ==============================================================
-// Reusable ProjectSection component (one full‑width section per project)
-// ==============================================================
-
+/* === Reusable Project Section Component === */
 const ProjectSection = ({
   title,
   description,
   image,
   imageLarge,
+  image2,
+  imageLarge2,
   techStack = [],
   github,
   reverse = false,
@@ -22,7 +21,7 @@ const ProjectSection = ({
   >
     <div
       className={`max-w-6xl mx-auto flex flex-col ${
-        image ? "md:flex-row items-start gap-12" : ""
+        image ? "md:flex-row md:items-center gap-12" : ""
       } ${reverse && image ? "md:flex-row-reverse" : ""}`}
     >
       {/* Text Section */}
@@ -31,35 +30,42 @@ const ProjectSection = ({
         <p className="text-lg text-gray-700 leading-relaxed">{description}</p>
       </div>
 
-      {/* Image Section */}
-      {image && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="w-full md:w-1/2 cursor-pointer"
-        >
-          {imageLarge ? (
-            <a href={imageLarge} target="_blank" rel="noopener noreferrer">
-              <motion.img
-                src={image}
-                alt={title}
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="rounded-2xl shadow-lg object-cover w-full h-auto"
-              />
-            </a>
-          ) : (
-            <motion.img
-              src={image}
-              alt={title}
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="rounded-2xl shadow-lg object-cover w-full h-auto"
-            />
-          )}
-        </motion.div>
+      {/* Image Section(s) */}
+      {(image || image2) && (
+        <div className="w-full md:w-1/2 flex flex-col items-center gap-6">
+          {[{ src: image, href: imageLarge }, { src: image2, href: imageLarge2 }]
+            .filter(({ src }) => src)
+            .map(({ src, href }, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="cursor-pointer w-full flex justify-center"
+              >
+                {href ? (
+                  <a href={href} target="_blank" rel="noopener noreferrer">
+                    <motion.img
+                      src={src}
+                      alt={`${title} ${idx + 1}`}
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                      className="rounded-2xl shadow-lg object-cover w-full max-w-lg max-h-[80vh]"
+                    />
+                  </a>
+                ) : (
+                  <motion.img
+                    src={src}
+                    alt={`${title} ${idx + 1}`}
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    className="rounded-2xl shadow-lg object-cover w-full max-w-lg max-h-[80vh]"
+                  />
+                )}
+              </motion.div>
+            ))}
+        </div>
       )}
     </div>
 
@@ -97,17 +103,14 @@ const TechAndLink = ({ techStack, github }) => (
   </div>
 );
 
-
-// ==============================================================
-// Main App component
-// ==============================================================
+/* === Main App Component === */
 const App = () => {
   const [startTyping, setStartTyping] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setStartTyping(true);
-    }, 1400); // Adjust this to sync with name typing
+    }, 1400); 
     return () => clearTimeout(timer);
   }, []);
 
@@ -135,13 +138,6 @@ const App = () => {
                 Projects
               </a>
             </li>
-            {/*}
-            <li>
-              <a href="#skills" className="hover:text-blue-600">
-                Skills
-              </a>
-            </li>
-            */}
             <li>
               <a href="#contact" className="hover:text-blue-600">
                 Contact
@@ -203,7 +199,7 @@ const App = () => {
         </motion.p>
       </div>
 
-      <div className="h-16 mt-6 flex justify-center items-end">
+      <div className="h-16 mt-8 flex justify-center items-end">
         {showArrow && (
           <button
             onClick={() =>
@@ -247,7 +243,7 @@ const App = () => {
             <p className="text-gray-700 text-lg leading-relaxed">
               I'm Fami Mahmud, a recent Informatics graduate from the Technical University of Munich with a focus on Machine Learning and IT Security. I'm passionate about building AI-powered solutions that solve real-world problems with practical impact.
               <br />
-              My projects span diverse domains — from detecting software vulnerabilities and identifying propaganda in memes to analyzing football data. I thrive in multicultural teams and enjoy tackling complex challenges while continuously learning and exploring new technologies.
+              My projects span diverse domains, from detecting software vulnerabilities and identifying propaganda in memes to analyzing football data. I thrive in multicultural teams and enjoy tackling complex challenges while continuously learning and exploring new technologies.
             </p>
           </div>
         </motion.div>
@@ -259,7 +255,11 @@ const App = () => {
       {/* === Project Sections === */}
       <ProjectSection
         title="Detection of Software Vulnerabilities using Fine-Tuned LLMs"
-        description="In my master’s thesis at the Fraunhofer AISEC institute, I explored the potential of fine-tuning open-source LLMs for automated vulnerability detection in source code. To support this task, I curated VulFusion, a four-variant dataset comprising 370,000 real-world and synthetic C functions. This dataset was constructed through careful selection, merging, and preprocessing steps to ensure high quality and diversity. Using parameter-efficient QLoRA fine-tuning, I trained models including Qwen2, Llama 3, Codestral, and CodeBERT—spanning sizes from 125M to 72B parameters. My experiments showed that while state-of-the-art LLMs at that time could confidently detect simple vulnerabilities, more complex cases—where subtle code changes have significant effects—remained a major challenge."
+        description="In my master’s thesis at the Fraunhofer AISEC institute, I explored the potential of fine-tuning open-source LLMs for automated vulnerability detection in source code. To support this task, I curated VulFusion, a four-variant dataset comprising 370,000 real-world and synthetic C functions. This dataset was constructed through careful selection, merging, and preprocessing steps to ensure high quality and diversity. Using parameter-efficient QLoRA fine-tuning, I trained models including Qwen2, Llama 3, Codestral, and CodeBERT, spanning sizes from 125M to 72B parameters. My experiments showed that while state-of-the-art LLMs at that time could confidently detect simple vulnerabilities, more complex cases involving subtle yet impactful code changes remained a major challenge."
+        image={require("./assets/projects/vulnerabilities/vulFusion_pipeline.png")}
+        imageLarge={require("./assets/projects/vulnerabilities/vulFusion_pipeline.pdf")}
+        image2={require("./assets/projects/vulnerabilities/training_pipeline.png")}
+        imageLarge2={require("./assets/projects/vulnerabilities/training_pipeline.pdf")}
         techStack={["Python", "HuggingFace", "Pandas", "Matplotlib","Weights & Biases"]}
         bg="bg-white"
       />
@@ -278,46 +278,12 @@ const App = () => {
         description="Aiming to bring pro-level football analytics within reach of amateur coaches and researchers, I investigated whether set pieces could be detected and classified using only positional data from players and the ball. To do this, we built a fully automated, two-layer ML pipeline that first predicts the ball state—identifying when it is out of play—and then classifies the resulting set piece. Trained on positional data from 102 Bundesliga matches (2017/18), our end-to-end system achieves a strong Matthews Correlation Coefficient of 0.907. The results gathered in the project with the Chair of Sports Informatics at TUM show that advanced match analysis can reach the grassroots game while bypassing the time-consuming, costly burden of manual event annotation."
         image={require("./assets/projects/setpieces/setpieces_image.png")}
         imageLarge={require("./assets/projects/setpieces/setpieces_image.png")}
+        image2={require("./assets/projects/setpieces/setpieces_pipeline.png")}
+        imageLarge2={require("./assets/projects/setpieces/setpieces_pipeline.png")}
         techStack={["Python", "Scikit-Learn", "NumPy", "SLURM"]}
         bg="bg-white"
       />
 
-      {/* Add more <ProjectSection /> blocks here as you expand your portfolio */}
-
-      {/* Skills Section */}
-      {/*
-      <section id="skills" className="py-24 bg-gray-50 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-10 text-gray-800">Skills</h2>
-          <div className="flex flex-wrap justify-center gap-4 text-sm">
-            {[
-              "Python",
-              "Pandas",
-              "Scikit-learn",
-              "PyTorch",
-              "Hugging Face",
-              "JavaScript",
-              "React",
-              "Tailwind CSS",
-              "SQL",
-              "Machine Learning",
-              "NLP",
-              "LLMs",
-              "Data Engineering",
-              "Git",
-              "Linux",
-            ].map((skill) => (
-              <span
-                key={skill}
-                className="bg-white border px-4 py-2 rounded-full shadow-sm hover:shadow-md transition"
-              >
-                {skill}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
-      */}
 
       {/* Contact Section */}
       <section id="contact" className="py-24 bg-white px-6 text-center">
