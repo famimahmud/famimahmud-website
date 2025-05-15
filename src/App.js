@@ -203,29 +203,32 @@ const App = () => {
         </motion.p>
       </div>
 
-      {showArrow && (
-        <div
-          className="absolute animate-bounce"
-          style={{
-            bottom: "7rem",
-          }}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-8 w-8 text-stone-700"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+      <div className="h-16 mt-6 flex justify-center items-end">
+        {showArrow && (
+          <button
+            onClick={() =>
+              document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })
+            }
+            aria-label="Scroll to About Me section"
+            className="focus:outline-none"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 9l-7 7-7-7"
-            />
-          </svg>
-        </div>
-      )}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-8 w-8 text-stone-700 animate-bounce hover:opacity-80 transition"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </button>
+        )}
+      </div>
 
     </section>
 
