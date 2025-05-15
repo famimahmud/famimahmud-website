@@ -199,7 +199,7 @@ const App = () => {
         </motion.p>
       </div>
 
-      <div className="h-16 mt-8 flex justify-center items-end">
+      <div className="h-16 mt-4 flex justify-center items-end">
         {showArrow && (
           <button
             onClick={() =>
