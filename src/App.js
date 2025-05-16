@@ -370,11 +370,11 @@ const App = () => {
           <p className="text-gray-600 mb-10 text-lg">
             If you have questions or would like to collaborate? I'd be happy to connect.
           </p>
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 w-full max-w-md mx-auto">
             {/* Email */}
             <a
               href="mailto:mahmudfami@gmail.com"
-              className="inline-flex items-center gap-2 px-5 py-2 bg-white border border-gray-200 rounded-full shadow hover:shadow-md hover:bg-gray-100 transition"
+              className="flex-1 min-w-[10rem] text-center inline-flex justify-center items-center gap-2 px-5 py-2 bg-white border border-gray-200 rounded-full shadow hover:shadow-md hover:bg-gray-100 transition"
             >
               <Mail className="w-5 h-5 text-gray-700" />
               <span className="text-gray-700">Email</span>
@@ -385,7 +385,7 @@ const App = () => {
               href="https://www.linkedin.com/in/fami-mahmud"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2 bg-white border border-gray-200 rounded-full shadow hover:shadow-md hover:bg-gray-100 transition"
+              className="flex-1 min-w-[10rem] text-center inline-flex justify-center items-center gap-2 px-5 py-2 bg-white border border-gray-200 rounded-full shadow hover:shadow-md hover:bg-gray-100 transition"
             >
               <LinkedInIcon />
               <span className="text-gray-700">LinkedIn</span>
@@ -396,12 +396,13 @@ const App = () => {
               href="https://github.com/famimahmud"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2 bg-white border border-gray-200 rounded-full shadow hover:shadow-md hover:bg-gray-100 transition"
+              className="flex-1 min-w-[10rem] text-center inline-flex justify-center items-center gap-2 px-5 py-2 bg-white border border-gray-200 rounded-full shadow hover:shadow-md hover:bg-gray-100 transition"
             >
               <GitHubIcon />
               <span className="text-gray-700">GitHub</span>
             </a>
           </div>
+
         </div>
       </section>
     </div>
