@@ -155,7 +155,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="bg-white text-gray-900 font-inter">
+    <div className="bg-white text-gray-900 font-sans">
       {/* Navbar */}
       <header className="fixed top-0 w-full bg-white shadow-md z-50">
         <nav className="relative max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
