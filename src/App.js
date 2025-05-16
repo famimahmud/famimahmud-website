@@ -155,12 +155,12 @@ const App = () => {
   }, []);
 
   return (
-    <div className="bg-white text-gray-900 font-sans">
+    <div className="bg-white text-gray-900 font-inter">
       {/* Navbar */}
       <header className="fixed top-0 w-full bg-white shadow-md z-50">
         <nav className="relative max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
           <h1 className="text-xl font-semibold tracking-wide">Fami Mahmud</h1>
-          <ul className="hidden md:flex space-x-6 text-sm font-medium">
+          <ul className="hidden md:flex space-x-6 text-base font-medium">
             <li>
               <a href="#about" className="hover:text-gray-500 transition-colors duration-200">
                 About
